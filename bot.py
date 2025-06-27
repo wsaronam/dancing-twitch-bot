@@ -9,17 +9,18 @@ TWITCH_SERVER = "irc.chat.twitch.tv"
 TWITCH_SERVER_PORT = 6667
 
 botUsername = "ENTER_BOT_USERNAME_HERE"
-botPassword = "ENTER_BOT_PASSWORD_HERE" # there might be a better way for this
-channelToJoin = "ENTER_CHANNEL_HERE" # this is the channel the bot will listen to (comments)
+botPassword = "oauth:ENTER_BOT_PASSWORD_HERE" # there might be a better way for this
+channelToJoin = "#ENTER_CHANNEL_HERE" # this is the channel the bot will listen to (comments)
 
 # these are the emotes that the bot will copy and paste in the chat when it comes up
-EMOTES_TO_COPY = ["Kappa"]
+EMOTES_TO_COPY = ["Kappa", "catJam", "catJAM"]
 
 
 
 
-def sendMessage():
-    return
+def sendMessage(sock, message):
+    message_temp = f"PRIVMSG {channelToJoin} :{message}\r\n"
+    sock.send(message_temp.encode("utf-8"))
 
 
 def connectToChannel(sock) -> bool:
@@ -71,11 +72,9 @@ def main():
             for emote in EMOTES_TO_COPY:
                 if emote in message:
                     print(f"copying emote: {emote}")
-                    pass
-                    #sendMessage()
-                    #time.sleep(10)
-
-        print("helo, world!")
+                    sendMessage(sock, emote)
+                    time.sleep(5)
+                    break
 
 
 
