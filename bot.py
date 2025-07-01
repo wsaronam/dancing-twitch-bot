@@ -13,7 +13,11 @@ botPassword = "oauth:ENTER_BOT_PASSWORD_HERE" # there might be a better way for 
 channelToJoin = "#ENTER_CHANNEL_HERE" # this is the channel the bot will listen to (comments)
 
 # these are the emotes that the bot will copy and paste in the chat when it comes up
-EMOTES_TO_COPY = ["Kappa", "catJam", "catJAM"]
+EMOTES_TO_COPY = ["catJam", "catJAM", "ratJAM", "AYAYAjam", "dogJAM", "batJAM", "babyJAM", 
+                  "xddJAM", "hoganJAM", "lebronJAM", "Jamgie", "Jammies", "garfJam", "kittyJam",
+                  "AlienPls3", "dancepls", "vibePls", "SussyPls", "AlienPls", "PartyPls", "widetime",
+                  "widetimepls", "SEXO", "WIDESEXO", "pepeD", "headBang", "blobDance", "PepoDance",
+                  "catDisco", "duckDisco", "hamsterDance", "wideVIBE", "RaveDance", "xddtime", "CatTime"]
 
 
 
@@ -40,8 +44,6 @@ def connectToChannel(sock) -> bool:
 # This function will check if the server responds with a ping or something else.
 # If it's a ping, we will tell the server the bot is still here
 def checkPing(sock, response) -> bool:
-    response = sock.recv(2048).decode("utf-8")
-
     if response.startswith("PING"):
         sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
         return True
@@ -73,7 +75,7 @@ def main():
                 if emote in message:
                     print(f"copying emote: {emote}")
                     sendMessage(sock, emote)
-                    time.sleep(5)
+                    time.sleep(10)
                     break
 
 
