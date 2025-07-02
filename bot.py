@@ -2,6 +2,8 @@ import time
 import socket
 import re
 
+from oauth import refreshTokenIfNeeded
+
 
 
 
@@ -60,6 +62,7 @@ def main():
     connected = connectToChannel(sock)
 
     while connected:
+        refreshTokenIfNeeded() # check if the token needs to be refreshed and will refresh it if needed
 
         response = sock.recv(2048).decode("utf-8")
         
